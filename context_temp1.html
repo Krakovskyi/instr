@@ -128,6 +128,68 @@
 
 Каждый из участников команды может дополнить файл своими пунктами на основе вышеизложенного или добавить свои выводы.
 
+# Описание архитектуры проекта
+
+## Controllers
+- **BridgeController**: Контроллер, управляющий взаимодействием с BridgeModule. Используется для обработки сигналов и их передачи.
+  - **Методы**:
+    - `ProcessSignal(SignalModel signal)`: Обрабатывает сигнал и возвращает результат.
+
+- **SeleniumController**: Контроллер для управления браузером через SeleniumModule.
+  - **Методы**:
+    - `Navigate(string url)`: Перенаправляет на указанный URL и возвращает заголовок страницы.
+
+## Modules
+- **BridgeModule**: Модуль для работы с сигналами, включает логику обработки данных.
+  - **Методы**:
+    - `ReceiveDataFromBrain(string jsonData)`: Принимает JSON-данные.
+    - `ProcessSignal(SignalModel signal)`: Логика обработки сигналов Buy/Sell.
+
+- **SeleniumModule**: Модуль для работы с браузером через Selenium.
+  - **Методы**:
+    - `NavigateToUrl(string url)`: Открывает указанную страницу в браузере.
+
+- **BinanceModule**: Модуль для работы с API Binance.
+  - **Методы**:
+    - `GetMarketData()`: Получает рыночные данные.
+    - `SendOrder(OrderModel order)`: Отправляет торговый ордер.
+
+- **ChatModule**: Модуль для работы с ChatGPT.
+  - **Методы**:
+    - `SendMessage(string message)`: Отправляет сообщение в ChatGPT и возвращает ответ.
+
+## Models
+- **SignalModel**: Модель данных для сигналов.
+  - **Поля**:
+    - `SignalType (string)`: Тип сигнала (Buy/Sell).
+    - `Price (decimal)`: Цена сигнала.
+    - `Quantity (decimal)`: Количество.
+    - `Timestamp (DateTime)`: Время получения сигнала.
+
+- **MarketDataModel**: Модель для хранения рыночных данных.
+  - **Поля**:
+    - `Symbol (string)`: Название пары.
+    - `Price (decimal)`: Текущая цена.
+
+- **ResponseModel**: Модель ответа от модулей.
+  - **Поля**:
+    - `Success (bool)`: Успешность операции.
+    - `Message (string)`: Сообщение ответа.
+
+## Utils
+- **Logger**: Класс для логирования событий.
+  - **Методы**:
+    - `LogInfo(string message)`: Записывает информационные логи.
+    - `LogError(string message)`: Записывает ошибки.
+
+## Прочее
+- **Program.cs**: Главный файл приложения, содержит настройку DI и middleware.
+  - **Методы**:
+    - Настройка Swagger, DI и запуск приложения.
+
+- **appsettings.json**: Конфигурационный файл для хранения настроек приложения.
+
+
 
         
     </pre>
