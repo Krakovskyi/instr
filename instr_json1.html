@@ -87,6 +87,7 @@ text
 "data": {
 "asset": "ADAUSDT",
 "orderType": "market",
+"side": "BUY",
 "positionSize": 8
 },
 "message": "Запрос на покупку актива"
@@ -102,6 +103,8 @@ text
 "data": {
 "asset": "ADAUSDT",
 "orderType": "market",
+"side": "SELL",
+"positionSide": "SHORT"       
 "positionSize": 0.1
 },
 "message": "Запрос на открытие шорт-позиции"
@@ -113,14 +116,30 @@ text
 {
 "messageId": 24365,
 "status": "ok",
-"action": 11,
+"action": 5,
 "data": {
 "asset": "ADAUSDT",
+"side": "SELL",        
 "positionSize": 8
 },
-"message": "Запрос на закрытие активной позиции"
+"message": "Запрос на закрытие активной позици Long"
 }
 ❋END❋
+
+Закрытие сделки SHORT (например, закрытие позиции по ADAUSDT):
+❋MSG❋
+{
+"messageId": 24365,
+"status": "ok",
+"action": 5,
+"data": {
+"asset": "ADAUSDT",
+"side": "BUY",        
+"positionSize": 8
+},
+"message": "Запрос на закрытие активной позици Short"
+}
+❋END❋        
 
 2. Логика принятия решений на основе состояния
 После запроса fetch_status:
